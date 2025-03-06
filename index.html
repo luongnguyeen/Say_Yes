@@ -16,12 +16,16 @@
             align-items: center;
             height: 100vh;
             background-color: #fce4ec;
+            overflow: hidden;
+            position: relative;
         }
         #question {
             font-size: 24px;
             margin-bottom: 20px;
             max-width: 90%;
             word-wrap: break-word;
+            position: relative;
+            z-index: 2;
         }
         .btn {
             padding: 10px 20px;
@@ -31,6 +35,8 @@
             border-radius: 5px;
             margin: 10px;
             transition: transform 0.2s;
+            position: relative;
+            z-index: 2;
         }
         .btn:active {
             transform: scale(0.95);
@@ -42,6 +48,15 @@
             background-color: lightcoral;
             position: absolute;
         }
+        #nextPage, #footerBtn {
+            background-color: deepskyblue;
+            display: none;
+        }
+        #footer {
+            position: absolute;
+            bottom: 20px;
+            text-align: center;
+        }
         @media (max-width: 600px) {
             #question {
                 font-size: 20px;
@@ -51,17 +66,43 @@
                 padding: 8px 16px;
             }
         }
+        .star {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background-color: white;
+            border-radius: 50%;
+            opacity: 0.8;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            from {
+                transform: translateY(-10vh) translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh) translateX(20px);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
 <body>
     <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
     <button id="agree" class="btn">Đồng ý</button>
     <button id="disagree" class="btn">Không đồng ý</button>
+    <button id="nextPage" class="btn" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
+    
+    <div id="footer">
+        <button id="footerBtn" class="btn" onclick="window.location.href='nextpage.html'">Đi đến trang tiếp theo</button>
+    </div>
     
     <script>
         const disagreeBtn = document.getElementById("disagree");
         const agreeBtn = document.getElementById("agree");
-        
+        const nextPageBtn = document.getElementById("nextPage");
+        const footerBtn = document.getElementById("footerBtn");
+
         function moveButton() {
             const x = Math.random() * (window.innerWidth - disagreeBtn.clientWidth - 20);
             const y = Math.random() * (window.innerHeight - disagreeBtn.clientHeight - 20);
@@ -74,7 +115,21 @@
         
         agreeBtn.addEventListener("click", function() {
             alert("Yay! ❤️ Anh/em biết mà!");
+            nextPageBtn.style.display = "inline-block";
+            footerBtn.style.display = "inline-block";
         });
+
+        function createStar() {
+            const star = document.createElement("div");
+            star.classList.add("star");
+            document.body.appendChild(star);
+            star.style.left = Math.random() * window.innerWidth + "px";
+            star.style.top = Math.random() * -10 + "px";
+            star.style.animationDuration = Math.random() * 3 + 2 + "s";
+            setTimeout(() => star.remove(), 5000);
+        }
+
+        setInterval(createStar, 300);
     </script>
 </body>
 </html>
