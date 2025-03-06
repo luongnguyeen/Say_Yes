@@ -122,8 +122,8 @@
             document.body.appendChild(star);
             star.style.left = Math.random() * window.innerWidth + "px";
             star.style.top = Math.random() * -10 + "px";
-            star.style.animationDuration = Math.random() * 3 + 2 + "s";
-            setTimeout(() => star.remove(), 5000);
+            star.style.animationDuration = Math.random() * 5 + 4 + "s";
+            setTimeout(() => star.remove(), 9000);
         }
 
         setInterval(createStar, 200);
