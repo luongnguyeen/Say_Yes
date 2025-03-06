@@ -1,139 +1,150 @@
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trò chơi Đồng Ý</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #1a1a2e;
-            color: white;
-            overflow: hidden;
-            position: relative;
-        }
-        #question {
-            font-size: 24px;
-            margin-bottom: 20px;
-            max-width: 90%;
-            word-wrap: break-word;
-            position: relative;
-            z-index: 2;
-        }
-        .btn {
-            padding: 12px 24px;
-            font-size: 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
-            margin: 10px;
-            transition: transform 0.2s;
-            position: relative;
-            z-index: 2;
-            color: white;
-        }
-        .btn:active {
-            transform: scale(0.95);
-        }
-        #agree {
-            background-color: #28a745;
-        }
-        #disagree {
-            background-color: #dc3545;
-            position: absolute;
-        }
-        #nextPage {
-            background-color: #007bff;
-        }
-        #footer {
-            position: fixed;
-            bottom: 20px;
-            text-align: center;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-        }
-        @media (max-width: 600px) {
-            #question {
-                font-size: 18px;
-                padding: 10px;
-            }
-            .btn {
-                font-size: 16px;
-                padding: 10px 20px;
-                margin: 5px;
-            }
-            #footer {
-                bottom: 10px;
-            }
-        }
-        .star {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background-color: white;
-            border-radius: 50%;
-            opacity: 1;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            from {
-                transform: translate(100vw, -10vh);
-                opacity: 1;
-            }
-            to {
-                transform: translate(-10vw, 100vh);
-                opacity: 0;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trò chơi Đồng Ý</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-color: #1a1a2e;
+      color: white;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    /* Container cho nội dung chính */
+    #main-container {
+      position: relative;
+      z-index: 2;
+      padding: 20px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    #question {
+      font-size: 24px;
+      margin-bottom: 20px;
+      max-width: 90%;
+      word-wrap: break-word;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .btn {
+      padding: 12px 24px;
+      font-size: 20px;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      margin: 10px;
+      transition: transform 0.2s;
+      color: white;
+    }
+    .btn:active {
+      transform: scale(0.95);
+    }
+    #agree {
+      background-color: #28a745;
+    }
+    /* Vẫn dùng absolute để di chuyển nút "Không đồng ý" */
+    #disagree {
+      background-color: #dc3545;
+      position: absolute;
+    }
+    #nextPage {
+      background-color: #007bff;
+    }
+    /* Footer cố định hiển thị nút "Tiếp tục" */
+    #footer {
+      position: fixed;
+      bottom: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      z-index: 2;
+      padding: 0 10px;
+      box-sizing: border-box;
+    }
+    .star {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background-color: white;
+      border-radius: 50%;
+      opacity: 1;
+      animation: fall linear infinite;
+    }
+    @keyframes fall {
+      from {
+        transform: translate(100vw, -10vh);
+        opacity: 1;
+      }
+      to {
+        transform: translate(-10vw, 100vh);
+        opacity: 0;
+      }
+    }
+    /* Responsive điều chỉnh cho thiết bị nhỏ */
+    @media (max-width: 600px) {
+      #question {
+        font-size: 16px;
+        margin-bottom: 15px;
+      }
+      .btn {
+        font-size: 14px;
+        padding: 10px 16px;
+        margin: 5px;
+      }
+      #footer {
+        bottom: 10px;
+      }
+    }
+  </style>
 </head>
 <body>
+  <div id="main-container">
     <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
     <button id="agree" class="btn">Đồng ý</button>
     <button id="disagree" class="btn">Không đồng ý</button>
+  </div>
+  <div id="footer">
+    <button id="nextPage" class="btn" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
+  </div>
+  <script>
+    const disagreeBtn = document.getElementById("disagree");
+    const agreeBtn = document.getElementById("agree");
+
+    function moveButton() {
+      // Tính toán vị trí mới đảm bảo nút không bị tràn ra ngoài màn hình
+      const x = Math.random() * (window.innerWidth - disagreeBtn.clientWidth - 20);
+      const y = Math.random() * (window.innerHeight - disagreeBtn.clientHeight - 20);
+      disagreeBtn.style.left = `${x}px`;
+      disagreeBtn.style.top = `${y}px`;
+    }
     
-    <div id="footer">
-        <button id="nextPage" class="btn" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
-    </div>
+    disagreeBtn.addEventListener("mouseover", moveButton);
+    disagreeBtn.addEventListener("touchstart", moveButton);
     
-    <script>
-        const disagreeBtn = document.getElementById("disagree");
-        const agreeBtn = document.getElementById("agree");
+    agreeBtn.addEventListener("click", function() {
+      alert("Yay! ❤️ Anh/em biết mà!");
+    });
 
-        function moveButton() {
-            const x = Math.random() * (window.innerWidth - disagreeBtn.clientWidth - 20);
-            const y = Math.random() * (window.innerHeight - disagreeBtn.clientHeight - 20);
-            disagreeBtn.style.left = `${x}px`;
-            disagreeBtn.style.top = `${y}px`;
-        }
-        
-        disagreeBtn.addEventListener("mouseover", moveButton);
-        disagreeBtn.addEventListener("touchstart", moveButton);
-        
-        agreeBtn.addEventListener("click", function() {
-            alert("Yay! ❤️ Anh/em biết mà!");
-        });
+    function createStar() {
+      const star = document.createElement("div");
+      star.classList.add("star");
+      document.body.appendChild(star);
+      star.style.left = Math.random() * window.innerWidth + "px";
+      star.style.top = Math.random() * -10 + "px";
+      star.style.animationDuration = Math.random() * 5 + 4 + "s";
+      setTimeout(() => star.remove(), 9000);
+    }
 
-        function createStar() {
-            const star = document.createElement("div");
-            star.classList.add("star");
-            document.body.appendChild(star);
-            star.style.left = Math.random() * window.innerWidth + "px";
-            star.style.top = Math.random() * -10 + "px";
-            star.style.animationDuration = Math.random() * 5 + 4 + "s";
-            setTimeout(() => star.remove(), 9000);
-        }
-
-        setInterval(createStar, 200);
-    </script>
+    setInterval(createStar, 200);
+  </script>
 </body>
 </html>
