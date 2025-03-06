@@ -48,9 +48,9 @@
             background-color: lightcoral;
             position: absolute;
         }
-        #nextPage, #footerBtn {
+        #nextPage {
             background-color: deepskyblue;
-            display: none;
+            display: inline-block;
         }
         #footer {
             position: absolute;
@@ -93,15 +93,9 @@
     <button id="disagree" class="btn">Không đồng ý</button>
     <button id="nextPage" class="btn" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
     
-    <div id="footer">
-        <button id="footerBtn" class="btn" onclick="window.location.href='nextpage.html'">Đi đến trang tiếp theo</button>
-    </div>
-    
     <script>
         const disagreeBtn = document.getElementById("disagree");
         const agreeBtn = document.getElementById("agree");
-        const nextPageBtn = document.getElementById("nextPage");
-        const footerBtn = document.getElementById("footerBtn");
 
         function moveButton() {
             const x = Math.random() * (window.innerWidth - disagreeBtn.clientWidth - 20);
@@ -115,8 +109,6 @@
         
         agreeBtn.addEventListener("click", function() {
             alert("Yay! ❤️ Anh/em biết mà!");
-            nextPageBtn.style.display = "inline-block";
-            footerBtn.style.display = "inline-block";
         });
 
         function createStar() {
