@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trò chơi Đồng Ý</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #fce4ec;
+        }
+        #question {
+            font-size: 24px;
+            margin-bottom: 20px;
+            max-width: 90%;
+            word-wrap: break-word;
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border: none;
+            border-radius: 5px;
+            margin: 10px;
+            transition: transform 0.2s;
+        }
+        .btn:active {
+            transform: scale(0.95);
+        }
+        #agree {
+            background-color: lightgreen;
+        }
+        #disagree {
+            background-color: lightcoral;
+            position: absolute;
+        }
+        @media (max-width: 600px) {
+            #question {
+                font-size: 20px;
+            }
+            .btn {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
+    <button id="agree" class="btn">Đồng ý</button>
+    <button id="disagree" class="btn">Không đồng ý</button>
+    
+    <script>
+        const disagreeBtn = document.getElementById("disagree");
+        const agreeBtn = document.getElementById("agree");
+        
+        function moveButton() {
+            const x = Math.random() * (window.innerWidth - disagreeBtn.clientWidth - 20);
+            const y = Math.random() * (window.innerHeight - disagreeBtn.clientHeight - 20);
+            disagreeBtn.style.left = `${x}px`;
+            disagreeBtn.style.top = `${y}px`;
+        }
+        
+        disagreeBtn.addEventListener("mouseover", moveButton);
+        disagreeBtn.addEventListener("touchstart", moveButton);
+        
+        agreeBtn.addEventListener("click", function() {
+            alert("Yay! ❤️ Anh/em biết mà!");
+        });
+    </script>
+</body>
+</html>
