@@ -15,7 +15,8 @@
             justify-content: center;
             align-items: center;
             height: 100vh;
-            background-color: #fce4ec;
+            background-color: #1a1a2e;
+            color: white;
             overflow: hidden;
             position: relative;
         }
@@ -37,20 +38,20 @@
             transition: transform 0.2s;
             position: relative;
             z-index: 2;
+            color: white;
         }
         .btn:active {
             transform: scale(0.95);
         }
         #agree {
-            background-color: lightgreen;
+            background-color: #28a745;
         }
         #disagree {
-            background-color: lightcoral;
+            background-color: #dc3545;
             position: absolute;
         }
         #nextPage {
-            background-color: deepskyblue;
-            display: inline-block;
+            background-color: #007bff;
         }
         #footer {
             position: absolute;
@@ -69,20 +70,20 @@
         }
         .star {
             position: absolute;
-            width: 6px;
-            height: 6px;
-            background-color: yellow;
+            width: 4px;
+            height: 4px;
+            background-color: white;
             border-radius: 50%;
             opacity: 1;
             animation: fall linear infinite;
         }
         @keyframes fall {
             from {
-                transform: translateY(-10vh) translateX(-10vw);
+                transform: translate(100vw, -10vh);
                 opacity: 1;
             }
             to {
-                transform: translateY(100vh) translateX(50vw);
+                transform: translate(-10vw, 100vh);
                 opacity: 0;
             }
         }
@@ -125,7 +126,7 @@
             setTimeout(() => star.remove(), 5000);
         }
 
-        setInterval(createStar, 300);
+        setInterval(createStar, 200);
     </script>
 </body>
 </html>
