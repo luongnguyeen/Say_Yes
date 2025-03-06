@@ -29,11 +29,11 @@
             z-index: 2;
         }
         .btn {
-            padding: 10px 20px;
-            font-size: 18px;
+            padding: 12px 24px;
+            font-size: 20px;
             cursor: pointer;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             margin: 10px;
             transition: transform 0.2s;
             position: relative;
@@ -54,18 +54,25 @@
             background-color: #007bff;
         }
         #footer {
-            position: absolute;
+            position: fixed;
             bottom: 20px;
             text-align: center;
             width: 100%;
+            display: flex;
+            justify-content: center;
         }
         @media (max-width: 600px) {
             #question {
-                font-size: 20px;
+                font-size: 18px;
+                padding: 10px;
             }
             .btn {
                 font-size: 16px;
-                padding: 8px 16px;
+                padding: 10px 20px;
+                margin: 5px;
+            }
+            #footer {
+                bottom: 10px;
             }
         }
         .star {
