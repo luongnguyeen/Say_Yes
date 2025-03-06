@@ -5,71 +5,76 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Trò chơi Đồng Ý</title>
   <style>
+    /* Reset cơ bản */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
     body {
       font-family: Arial, sans-serif;
-      text-align: center;
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
       background-color: #1a1a2e;
       color: white;
       overflow: hidden;
-      position: relative;
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
+      min-height: 100vh;
     }
-    /* Container cho nội dung chính */
-    #main-container {
+    
+    /* Container bao bọc nội dung chính */
+    #container {
       position: relative;
-      z-index: 2;
-      padding: 20px;
       width: 100%;
-      box-sizing: border-box;
+      height: 100%;
+      text-align: center;
+      padding: 20px;
     }
+    
     #question {
-      font-size: 24px;
-      margin-bottom: 20px;
-      max-width: 90%;
-      word-wrap: break-word;
-      margin-left: auto;
-      margin-right: auto;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
     }
+    
     .btn {
-      padding: 12px 24px;
-      font-size: 20px;
-      cursor: pointer;
+      padding: 0.75rem 1.5rem;
+      font-size: 1.25rem;
       border: none;
-      border-radius: 8px;
-      margin: 10px;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      margin: 0.5rem;
       transition: transform 0.2s;
-      color: white;
     }
+    
     .btn:active {
       transform: scale(0.95);
     }
+    
     #agree {
       background-color: #28a745;
+      color: white;
     }
-    /* Vẫn dùng absolute để di chuyển nút "Không đồng ý" */
+    
+    /* Sử dụng viewport units để định vị nút "Không đồng ý" cho tính responsive */
     #disagree {
       background-color: #dc3545;
+      color: white;
       position: absolute;
     }
-    #nextPage {
-      background-color: #007bff;
-    }
-    /* Footer cố định hiển thị nút "Tiếp tục" */
+    
+    /* Footer cố định cho nút "Tiếp tục" */
     #footer {
       position: fixed;
       bottom: 20px;
       width: 100%;
       display: flex;
       justify-content: center;
-      z-index: 2;
       padding: 0 10px;
-      box-sizing: border-box;
     }
+    
+    #nextPage {
+      background-color: #007bff;
+      color: white;
+    }
+    
     .star {
       position: absolute;
       width: 4px;
@@ -79,6 +84,7 @@
       opacity: 1;
       animation: fall linear infinite;
     }
+    
     @keyframes fall {
       from {
         transform: translate(100vw, -10vh);
@@ -89,16 +95,15 @@
         opacity: 0;
       }
     }
-    /* Responsive điều chỉnh cho thiết bị nhỏ */
+    
+    /* Responsive cho thiết bị nhỏ */
     @media (max-width: 600px) {
       #question {
-        font-size: 16px;
-        margin-bottom: 15px;
+        font-size: 1.5rem;
       }
       .btn {
-        font-size: 14px;
-        padding: 10px 16px;
-        margin: 5px;
+        padding: 0.5rem 1rem;
+        font-size: 1rem;
       }
       #footer {
         bottom: 10px;
@@ -107,24 +112,26 @@
   </style>
 </head>
 <body>
-  <div id="main-container">
+  <div id="container">
     <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
     <button id="agree" class="btn">Đồng ý</button>
     <button id="disagree" class="btn">Không đồng ý</button>
   </div>
+  
   <div id="footer">
     <button id="nextPage" class="btn" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
   </div>
+  
   <script>
     const disagreeBtn = document.getElementById("disagree");
     const agreeBtn = document.getElementById("agree");
-
+    
     function moveButton() {
-      // Tính toán vị trí mới đảm bảo nút không bị tràn ra ngoài màn hình
-      const x = Math.random() * (window.innerWidth - disagreeBtn.clientWidth - 20);
-      const y = Math.random() * (window.innerHeight - disagreeBtn.clientHeight - 20);
-      disagreeBtn.style.left = `${x}px`;
-      disagreeBtn.style.top = `${y}px`;
+      // Sử dụng viewport units để đảm bảo vị trí tính theo tỷ lệ màn hình
+      const randomX = Math.random() * 80 + 10; // từ 10vw đến 90vw
+      const randomY = Math.random() * 70 + 10; // từ 10vh đến 80vh
+      disagreeBtn.style.left = randomX + "vw";
+      disagreeBtn.style.top = randomY + "vh";
     }
     
     disagreeBtn.addEventListener("mouseover", moveButton);
@@ -133,17 +140,17 @@
     agreeBtn.addEventListener("click", function() {
       alert("Yay! ❤️ Anh/em biết mà!");
     });
-
+    
     function createStar() {
       const star = document.createElement("div");
       star.classList.add("star");
       document.body.appendChild(star);
-      star.style.left = Math.random() * window.innerWidth + "px";
-      star.style.top = Math.random() * -10 + "px";
+      star.style.left = Math.random() * 100 + "vw";
+      star.style.top = Math.random() * -10 + "vh";
       star.style.animationDuration = Math.random() * 5 + 4 + "s";
       setTimeout(() => star.remove(), 9000);
     }
-
+    
     setInterval(createStar, 200);
   </script>
 </body>
