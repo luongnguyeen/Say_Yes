@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đồng ý...nhớ đồng ý</title>
+  <title>Trò chơi Đồng Ý</title>
   <style>
     /* Reset cơ bản */
     * {
@@ -134,12 +134,12 @@
   <img id="bottomLeftGif" src="https://media.giphy.com/media/l0HlBo7eyXzSZkJri/giphy.gif" alt="Bottom Left Gif">
   
   <div id="main-container">
-    <div id="question"> E nhớ iu thưn bản thân thật nhìu...E hông làm là A làm thay đó 😄...E thử nhấn "Không đồng ý" coi ...A...là...A...</div>
+    <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
     <div id="buttons">
-      <button id="agree" class="btn">Nhuất trí 👏</button>
+      <button id="agree" class="btn">Đồng ý</button>
       <!-- Nút "Không đồng ý" sẽ được đặt độc lập theo vị trí tuyệt đối -->
     </div>
-    <button id="disagree" class="btn">Còn nâu 😅</button>
+    <button id="disagree" class="btn">Không đồng ý</button>
   </div>
   <div id="footer">
     <button id="nextPage" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
@@ -151,19 +151,18 @@
     const questionEl = document.getElementById("question");
 
     function moveButton() {
-      const containerRect = mainContainer.getBoundingClientRect();
-      const questionRect = questionEl.getBoundingClientRect();
-      const margin = 20; // Khoảng cách cách ly dưới câu hỏi
-      // Tính vị trí tối thiểu (so với container) là đáy của câu hỏi cộng margin
-      const minY = questionRect.bottom - containerRect.top + margin;
-      const maxY = containerRect.height - disagreeBtn.offsetHeight;
-      let randomY;
+      // Sử dụng offset để đảm bảo vị trí tính từ đầu container
+      const containerWidth = mainContainer.offsetWidth;
+      const containerHeight = mainContainer.offsetHeight;
+      const margin = 20; // Khoảng cách cách ly bên dưới câu hỏi
+      const questionBottom = questionEl.offsetTop + questionEl.offsetHeight;
+      const minY = questionBottom + margin;
+      const maxY = containerHeight - disagreeBtn.offsetHeight;
+      let randomY = minY;
       if (minY < maxY) {
         randomY = Math.random() * (maxY - minY) + minY;
-      } else {
-        randomY = minY;
       }
-      const maxX = containerRect.width - disagreeBtn.offsetWidth;
+      const maxX = containerWidth - disagreeBtn.offsetWidth;
       const randomX = Math.random() * maxX;
       disagreeBtn.style.left = randomX + "px";
       disagreeBtn.style.top = randomY + "px";
@@ -173,7 +172,7 @@
     disagreeBtn.addEventListener("touchstart", moveButton);
     
     agreeBtn.addEventListener("click", function() {
-      alert("Yeah...! Quàng Thượng anh minh 🤣");
+      alert("Yay! ❤️ Anh/em biết mà!");
     });
     
     function createStar() {
