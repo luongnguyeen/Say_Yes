@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đồng ý...nhớ là đồng ý nha</title>
+  <title>Trò chơi Đồng Ý</title>
   <style>
     /* Reset cơ bản */
     * {
@@ -124,7 +124,7 @@
       <button id="agree" class="btn">Nhuất trí 👏</button>
       <!-- Nút "Không đồng ý" sẽ được đặt độc lập theo vị trí tuyệt đối -->
     </div>
-    <button id="disagree" class="btn">Còn nâu 😅</button>
+    <button id="disagree" class="btn">Còn nâu 😅 </button>
   </div>
   <div id="footer">
     <button id="nextPage" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
@@ -133,14 +133,23 @@
     const disagreeBtn = document.getElementById("disagree");
     const agreeBtn = document.getElementById("agree");
     const mainContainer = document.getElementById("main-container");
+    const questionEl = document.getElementById("question");
 
     function moveButton() {
-      // Tính toán vị trí ngẫu nhiên trong phạm vi của container
       const containerRect = mainContainer.getBoundingClientRect();
-      const maxX = containerRect.width - disagreeBtn.offsetWidth;
+      const questionRect = questionEl.getBoundingClientRect();
+      const margin = 20; // Khoảng cách cách ly dưới câu hỏi
+      // Tính vị trí tối thiểu (so với container) là đáy của câu hỏi cộng margin
+      const minY = questionRect.bottom - containerRect.top + margin;
       const maxY = containerRect.height - disagreeBtn.offsetHeight;
+      let randomY;
+      if (minY < maxY) {
+        randomY = Math.random() * (maxY - minY) + minY;
+      } else {
+        randomY = minY;
+      }
+      const maxX = containerRect.width - disagreeBtn.offsetWidth;
       const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
       disagreeBtn.style.left = randomX + "px";
       disagreeBtn.style.top = randomY + "px";
     }
@@ -156,9 +165,8 @@
       const star = document.createElement("div");
       star.classList.add("star");
       document.body.appendChild(star);
-      // Khởi tạo sao từ góc trên bên phải
       star.style.left = Math.random() * window.innerWidth + "px";
-      star.style.top = "-10vh";
+      star.style.top = Math.random() * -10 + "px";
       star.style.animationDuration = Math.random() * 5 + 4 + "s";
       setTimeout(() => star.remove(), 9000);
     }
