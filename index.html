@@ -3,11 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" href="favicon.ico" type="image/x-icon">
-  <title>Đồng ý...nhớ là đồng ý</title>
+  <title>Đồng ý...nhớ đồng ý</title>
   <style>
     /* Reset cơ bản */
-    * { 
+    * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
@@ -24,6 +23,16 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      position: relative;
+    }
+    /* Hình gif ở góc dưới bên trái */
+    #bottomLeftGif {
+      position: fixed;
+      bottom: 10px;
+      left: 10px;
+      width: 80px;
+      height: auto;
+      z-index: 5;
     }
     /* Container bao bọc nội dung chính, chiếm phần lớn màn hình */
     #main-container {
@@ -75,6 +84,8 @@
       width: 100%;
       text-align: center;
       padding: 10px;
+      position: relative;
+      z-index: 10; /* Đảm bảo footer hiển thị trên hình gif */
     }
     #nextPage {
       background-color: #007bff;
@@ -119,16 +130,19 @@
   </style>
 </head>
 <body>
+  <!-- Hình gif ở góc dưới bên trái -->
+  <img id="bottomLeftGif" src="https://media.giphy.com/media/l0HlBo7eyXzSZkJri/giphy.gif" alt="Bottom Left Gif">
+  
   <div id="main-container">
-    <div id="question">E nhớ iu thưn bản thân thật nhìu...E hông làm là A làm thay đó 😄...E thử nhấn "Còn nâu 😅" coi ...A...là...A...</div>
+    <div id="question"> E nhớ iu thưn bản thân thật nhìu...E hông làm là A làm thay đó 😄...E thử nhấn "Không đồng ý" coi ...A...là...A...</div>
     <div id="buttons">
       <button id="agree" class="btn">Nhuất trí 👏</button>
       <!-- Nút "Không đồng ý" sẽ được đặt độc lập theo vị trí tuyệt đối -->
     </div>
-    <button id="disagree" class="btn">Còn nâu 😅 </button>
+    <button id="disagree" class="btn">Còn nâu 😅</button>
   </div>
   <div id="footer">
-    <button id="nextPage" onclick="window.location.href='https://luongnguyeen.github.io/Gui_Be_Ngan_xa_nho/'">Về trang đầu</button>
+    <button id="nextPage" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
   </div>
   <script>
     const disagreeBtn = document.getElementById("disagree");
