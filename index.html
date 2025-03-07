@@ -25,23 +25,6 @@
       justify-content: space-between;
       position: relative;
     }
-    /* Hình gif ở góc dưới bên trái */
-    #bottomLeftGif {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      width: 80px;
-      height: auto;
-      z-index: 5;
-      pointer-events: none;
-    }
-    /* Điều chỉnh cho thiết bị nhỏ */
-    @media (max-width: 480px) {
-      #bottomLeftGif {
-         bottom: 60px; /* Nâng lên để không bị footer che khuất */
-         width: 60px;
-      }
-    }
     /* Container bao bọc nội dung chính, chiếm phần lớn màn hình */
     #main-container {
       position: relative;
@@ -94,7 +77,7 @@
       text-align: center;
       padding: 10px;
       position: relative;
-      z-index: 10; /* Đảm bảo footer hiển thị trên hình gif */
+      z-index: 10; /* Đảm bảo footer hiển thị trên các phần tử khác */
     }
     #nextPage {
       background-color: #007bff;
@@ -139,64 +122,9 @@
   </style>
 </head>
 <body>
-  <!-- Hình gif ở góc dưới bên trái -->
-  <img id="bottomLeftGif" src="https://media.giphy.com/media/l0HlBo7eyXzSZkJri/giphy.gif" alt="Bottom Left Gif">
-  
   <div id="main-container">
     <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
     <div id="buttons">
       <button id="agree" class="btn">Đồng ý</button>
     </div>
-    <!-- Nút "Không đồng ý" được đặt bằng vị trí tuyệt đối -->
-    <button id="disagree" class="btn">Không đồng ý</button>
-  </div>
-  <div id="footer">
-    <button id="nextPage" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
-  </div>
-  <script>
-    const disagreeBtn = document.getElementById("disagree");
-    const agreeBtn = document.getElementById("agree");
-    const mainContainer = document.getElementById("main-container");
-    const questionEl = document.getElementById("question");
-
-    function moveButton() {
-      // Lấy kích thước container và vị trí đáy của câu hỏi
-      const containerWidth = mainContainer.offsetWidth;
-      const containerHeight = mainContainer.offsetHeight;
-      const margin = 20; // Khoảng cách cách ly bên dưới câu hỏi
-      const questionBottom = questionEl.offsetTop + questionEl.offsetHeight;
-      const minY = questionBottom + margin;
-      const maxY = containerHeight - disagreeBtn.offsetHeight;
-      let randomY = minY;
-      if (minY < maxY) {
-        randomY = Math.random() * (maxY - minY) + minY;
-      }
-      const maxX = containerWidth - disagreeBtn.offsetWidth;
-      const randomX = Math.random() * maxX;
-      disagreeBtn.style.left = randomX + "px";
-      disagreeBtn.style.top = randomY + "px";
-    }
-    
-    // Gọi hàm moveButton khi trang tải xong để đảm bảo vị trí ban đầu không che câu hỏi
-    window.addEventListener("load", moveButton);
-    disagreeBtn.addEventListener("mouseover", moveButton);
-    disagreeBtn.addEventListener("touchstart", moveButton);
-    
-    agreeBtn.addEventListener("click", function() {
-      alert("Yay! ❤️ Anh/em biết mà!");
-    });
-    
-    function createStar() {
-      const star = document.createElement("div");
-      star.classList.add("star");
-      document.body.appendChild(star);
-      star.style.left = Math.random() * window.innerWidth + "px";
-      star.style.top = Math.random() * -10 + "px";
-      star.style.animationDuration = Math.random() * 5 + 4 + "s";
-      setTimeout(() => star.remove(), 9000);
-    }
-    
-    setInterval(createStar, 200);
-  </script>
-</body>
-</html>
+    <!-- N
