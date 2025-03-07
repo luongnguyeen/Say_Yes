@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Trò chơi Đồng Ý</title>
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <title>Đồng Ý....nhớ đồng ý ☺️</title>
   <style>
     /* Reset cơ bản */
     * {
@@ -25,16 +26,7 @@
       justify-content: space-between;
       position: relative;
     }
-    /* Hình gif ở góc dưới bên trái */
-    #bottomLeftGif {
-      position: fixed;
-      bottom: 10px;
-      left: 10px;
-      width: 80px;
-      height: auto;
-      z-index: 5;
-      pointer-events: none;
-    }
+    
     /* Điều chỉnh cho thiết bị nhỏ */
     @media (max-width: 480px) {
       #bottomLeftGif {
@@ -142,15 +134,16 @@
   <!-- Hình gif ở góc dưới bên trái -->
   
   <div id="main-container">
-    <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
+    <div id="question"> E nhớ iu thưn bản thân thật nhìu...E hông làm là A làm thay đó 😄...E thử nhấn "Không đồng ý" coi ...A...là...A...
+</div>
     <div id="buttons">
-      <button id="agree" class="btn">Đồng ý</button>
+      <button id="agree" class="btn">Nhuất trí 👏</button>
     </div>
     <!-- Nút "Không đồng ý" được đặt bằng vị trí tuyệt đối -->
-    <button id="disagree" class="btn">Không đồng ý</button>
+    <button id="disagree" class="btn">Còn nâu 😅</button>
   </div>
   <div id="footer">
-    <button id="nextPage" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
+    <button id="nextPage" onclick="window.location.href='https://luongnguyeen.github.io/Gui_Be_Ngan_xa_nho/l'">Về trang đầu tiên</button>
   </div>
   <script>
     const disagreeBtn = document.getElementById("disagree");
@@ -182,7 +175,7 @@
     disagreeBtn.addEventListener("touchstart", moveButton);
     
     agreeBtn.addEventListener("click", function() {
-      alert("Yay! ❤️ Anh/em biết mà!");
+      alert("Yeah...! Quàng Thượng anh minh 🤣");
     });
     
     function createStar() {
