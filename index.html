@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Đồng ý...nhớ là đồng ý nha</title>
+  <title>Trò chơi Đồng Ý</title>
   <style>
     /* Reset cơ bản */
     * {
@@ -23,8 +23,9 @@
       flex-direction: column;
       align-items: center;
       justify-content: space-between;
+      position: relative;
     }
-     /* Hình gif ở góc dưới bên trái */
+    /* Hình gif ở góc dưới bên trái */
     #bottomLeftGif {
       position: fixed;
       bottom: 10px;
@@ -32,11 +33,13 @@
       width: 80px;
       height: auto;
       z-index: 5;
+    }
     /* Container bao bọc nội dung chính, chiếm phần lớn màn hình */
     #main-container {
       position: relative;
       width: 100%;
       flex: 1;
+      min-height: 60vh;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -82,6 +85,8 @@
       width: 100%;
       text-align: center;
       padding: 10px;
+      position: relative;
+      z-index: 10; /* Đảm bảo footer hiển thị trên hình gif */
     }
     #nextPage {
       background-color: #007bff;
@@ -126,14 +131,16 @@
   </style>
 </head>
 <body>
+  <!-- Hình gif ở góc dưới bên trái -->
   <img id="bottomLeftGif" src="https://media.giphy.com/media/l0HlBo7eyXzSZkJri/giphy.gif" alt="Bottom Left Gif">
+  
   <div id="main-container">
-    <div id="question">E nhớ iu thưn bản thân thật nhìu...E hông làm là A làm thay đó 😄...E thử nhấn "Còn nâu 😅" coi ...A...là...A...</div>
+    <div id="question">Bạn có đồng ý làm người yêu tôi không? 🥰</div>
     <div id="buttons">
-      <button id="agree" class="btn">Nhuất trí 👏</button>
-      <!-- Nút "Không đồng ý" sẽ được đặt độc lập theo vị trí tuyệt đối -->
+      <button id="agree" class="btn">Đồng ý</button>
     </div>
-    <button id="disagree" class="btn">Còn nâu 😅</button>
+    <!-- Nút "Không đồng ý" được đặt bằng vị trí tuyệt đối -->
+    <button id="disagree" class="btn">Không đồng ý</button>
   </div>
   <div id="footer">
     <button id="nextPage" onclick="window.location.href='nextpage.html'">Tiếp tục</button>
@@ -142,32 +149,41 @@
     const disagreeBtn = document.getElementById("disagree");
     const agreeBtn = document.getElementById("agree");
     const mainContainer = document.getElementById("main-container");
+    const questionEl = document.getElementById("question");
 
     function moveButton() {
-      // Tính toán vị trí ngẫu nhiên trong phạm vi của container
-      const containerRect = mainContainer.getBoundingClientRect();
-      const maxX = containerRect.width - disagreeBtn.offsetWidth;
-      const maxY = containerRect.height - disagreeBtn.offsetHeight;
+      // Lấy kích thước container và vị trí đáy của câu hỏi
+      const containerWidth = mainContainer.offsetWidth;
+      const containerHeight = mainContainer.offsetHeight;
+      const margin = 20; // Khoảng cách cách ly bên dưới câu hỏi
+      const questionBottom = questionEl.offsetTop + questionEl.offsetHeight;
+      const minY = questionBottom + margin;
+      const maxY = containerHeight - disagreeBtn.offsetHeight;
+      let randomY = minY;
+      if (minY < maxY) {
+        randomY = Math.random() * (maxY - minY) + minY;
+      }
+      const maxX = containerWidth - disagreeBtn.offsetWidth;
       const randomX = Math.random() * maxX;
-      const randomY = Math.random() * maxY;
       disagreeBtn.style.left = randomX + "px";
       disagreeBtn.style.top = randomY + "px";
     }
     
+    // Gọi hàm moveButton khi trang tải xong để đảm bảo vị trí ban đầu không che câu hỏi
+    window.addEventListener("load", moveButton);
     disagreeBtn.addEventListener("mouseover", moveButton);
     disagreeBtn.addEventListener("touchstart", moveButton);
     
     agreeBtn.addEventListener("click", function() {
-      alert("Yeah...! Quàng Thượng anh minh 🤣");
+      alert("Yay! ❤️ Anh/em biết mà!");
     });
     
     function createStar() {
       const star = document.createElement("div");
       star.classList.add("star");
       document.body.appendChild(star);
-      // Khởi tạo sao từ góc trên bên phải
       star.style.left = Math.random() * window.innerWidth + "px";
-      star.style.top = "-10vh";
+      star.style.top = Math.random() * -10 + "px";
       star.style.animationDuration = Math.random() * 5 + 4 + "s";
       setTimeout(() => star.remove(), 9000);
     }
